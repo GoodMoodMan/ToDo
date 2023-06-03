@@ -1,5 +1,6 @@
 {
   "name": "task-management",
+  "homepage": ".",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,6 +24,7 @@
     "eject": "react-scripts eject",
 	"predeploy": "npm run build",
 	"deploy": "gh-pages -d build"
+	
   },
   "eslintConfig": {
     "extends": [
@@ -45,4 +47,5 @@
   "devDependencies": {
     "gh-pages": "^5.0.0"
   }
+  
 }
