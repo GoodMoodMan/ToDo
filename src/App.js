@@ -66,6 +66,12 @@ function App() {
 
   }, [tasks])
 
+  // every change to current tab, reset alert
+  useEffect(() => {
+    setAlertType(-1);
+
+  }, [curr_tab])
+
   const HandleLogin = (username, password) => {
     console.log("connect");
     fetch(`http://${server_ip}:3001/users/login`, {

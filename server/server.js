@@ -7,7 +7,8 @@ const cors = require('cors');
 app.use(cors());  
 app.use(express.json());
 
-mongoose.connect('mongodb://127.0.0.1:27017/app', {
+const mongoURI = "mongodb+srv://test:ljR36wHjImUdTaad@cluster0.flnm2su.mongodb.net/?retryWrites=true&w=majority";
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })

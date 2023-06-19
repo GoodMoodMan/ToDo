@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle, faClock, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import './App_comp.css';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -14,6 +15,16 @@ function BodyTask(props) {
   const [edit_id, setEditId] = useState("");
 
 
+  // this useEffect runs on initial render
+  // adds appropriate icon to every task
+  useEffect(() => {
+    const taskList = [...props.taskList];
+    for(const task of taskList) {
+      task.icon = icon(task.date);
+    }
+    props.setTasks(taskList);
+
+  },[])
 
   const getMaxID = (taskList) => {
     var id = 0;
@@ -27,7 +38,7 @@ function BodyTask(props) {
 
   const handleAddTask = () => {
     const newTaskId = "Task " + (getMaxID(props.taskList) + 1);
-    const newTaskObj = { id: newTaskId, content: 'newTask', date: new Date() };
+    const newTaskObj = { id: newTaskId, content: 'newTask', date: new Date(), icon: icon(new Date())};
     const updatedTasks = [...props.taskList, newTaskObj];
     props.setTasks(updatedTasks);
   };
@@ -74,11 +85,29 @@ function BodyTask(props) {
     const update = [...props.taskList];
     var index = update.findIndex(task => task.id === taskID);
     update[index].date = date;
+    update[index].icon = icon(date);
     props.setTasks(update);
 
   }
 
   const grid = 8;
+  const icon = (deadline) => {
+    const timeDiff = new Date(deadline) - new Date().getTime();
+  
+    const warningThreshold = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
+    const dangerThreshold = 24 * 60 * 60 * 1000; // 1 day in milliseconds
+  
+    // Set the icon based on the time difference
+    let icontype = null;
+    if (timeDiff <= 0) {
+      icontype = <FontAwesomeIcon icon={faExclamationCircle} color="red" />;
+    } else if (timeDiff < dangerThreshold) {
+      icontype = <FontAwesomeIcon icon={faClock} color="orange" />;
+    } else if (timeDiff < warningThreshold) {
+      icontype = <FontAwesomeIcon icon={faInfoCircle} color="yellow" />;
+    }
+    return icontype;
+  };
   const getItemStyle = (isDragging, draggableStyle, snapshot, deadline) => {
     const defaultStyle = {
       // some basic styles to make the items look a bit nicer
@@ -101,33 +130,7 @@ function BodyTask(props) {
       };
     }
 
-    // Time untill deadline
-    const timeDiff = new Date(deadline) - new Date().getTime();
 
-    const warningThreshold = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
-    const dangerThreshold = 24 * 60 * 60 * 1000; // 1 day in milliseconds
-
-    // Apply different background colors based on the time difference
-    if (timeDiff < 0) {
-      // Past the deadline, apply red background
-      return {
-        ...defaultStyle,
-        background: '#FF7F7F',
-      };
-    } else if (timeDiff < dangerThreshold) {
-      // Within 24 hours of the deadline, apply orange background
-      return {
-        ...defaultStyle,
-        background: '#FFA54F',
-      };
-    } else if (timeDiff < warningThreshold) {
-      // Within 3 days of the deadline, apply yellow background
-      return {
-        ...defaultStyle,
-        background: '#FFF380',
-      };
-    }
-    
     return defaultStyle;
   };
 
@@ -198,6 +201,7 @@ function BodyTask(props) {
                                   dateFormat="dd/MM/yyyy"
                                 />
                               </div>
+                              <div>{task.icon}</div>
 
                               <button type="button" onClick={() => {
                                 if (task.id !== edit_id) setEditId(task.id);
