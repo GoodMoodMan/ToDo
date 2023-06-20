@@ -68,7 +68,9 @@
 }
 
 .datepicker {
-  max-width: 25vw;
+  display:auto;
+  text-align:center;
+  max-width: 97px;
 }
 
 .alert {
@@ -83,7 +85,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width:12vw;
+  max-width:9vw;
 }
 
 @media (max-width: 768px) {
@@ -94,8 +96,3 @@
   }
 }
 
-.datepicker {
-  display: flex;
-  text-align:center;
-  
-}

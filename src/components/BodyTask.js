@@ -193,8 +193,6 @@ function BodyTask(props) {
                               <div className='container d-flex flex-column'>
                                 <p>Finish Date:</p>
                                 <DatePicker
-
-
                                   selected={new Date(task.date)}
                                   onChange={(date) => handleDateChange(task.id, date)}
                                   className='datepicker'
