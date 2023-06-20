@@ -83,5 +83,19 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  max-width: 24vw; /* Adjust the max-width as desired */
+  max-width:12vw;
+}
+
+@media (max-width: 768px) {
+  /* Apply styles for screens up to 768px width (e.g., phones) */
+  .text-block {
+    max-width:25vw; /* Use full width of the screen */
+    
+  }
+}
+
+.datepicker {
+  display: flex;
+  text-align:center;
+  
 }
