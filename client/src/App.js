@@ -46,6 +46,7 @@ function App() {
     // putting the new task list to server using saved username
     console.log("update");
     fetch(`https://${server_ip}/users/${true_username}/tasks`, {
+      
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

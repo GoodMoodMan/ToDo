@@ -1,15 +1,11 @@
-const serverless = require('serverless-http');
+
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const User = require('./models/User');
 const cors = require('cors');
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+app.use(cors());
 
 app.use(express.json());
 
@@ -137,4 +133,4 @@ app.get('/users/admin', (req, res) => {
 
 
 // Wrap the Express app for serverless deployment
-module.exports.handler = serverless(app);
+module.exports.handler = app;

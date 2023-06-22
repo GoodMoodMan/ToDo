@@ -24,7 +24,7 @@ function BodyTask(props) {
     }
     props.setTasks(taskList);
 
-  })
+  },[])
 
   const getMaxID = (taskList) => {
     var id = 0;
