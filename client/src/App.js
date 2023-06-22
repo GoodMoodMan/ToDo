@@ -9,7 +9,7 @@ import BodyAdmin from './components/BodyAdmin';
 
 const server_ip = 'to-do-server-alpha.vercel.app/api/';
 
-fetch(`http://${server_ip}`)
+fetch(`https://${server_ip}`)
   .then(response => response.text())
   .then(data => {
     // Handle the response data
@@ -45,7 +45,7 @@ function App() {
     // this useEffect hook gets called on any change to tasks,
     // putting the new task list to server using saved username
     console.log("update");
-    fetch(`http://${server_ip}/users/${true_username}/tasks`, {
+    fetch(`https://${server_ip}/users/${true_username}/tasks`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ function App() {
 
   const HandleLogin = (username, password) => {
     console.log("connect");
-    fetch(`http://${server_ip}/users/login`, {
+    fetch(`https://${server_ip}/users/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ function App() {
     }
 
 
-    fetch(`http://${server_ip}/users/signup`, {
+    fetch(`https://${server_ip}/users/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

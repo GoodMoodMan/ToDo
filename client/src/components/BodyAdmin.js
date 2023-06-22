@@ -8,7 +8,7 @@ function BodyAdmin(props) {
 
   // useEffect to fetch users list on initial render
   useEffect(() => {
-    fetch(`http://${props.server_ip}/users/admin`)
+    fetch(`https://${props.server_ip}/users/admin`)
       .then(response => response.json())
       .then(data => {
         setUsers(data);
