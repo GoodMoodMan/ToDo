@@ -146,5 +146,4 @@ app.get('/users/admin', (req, res) => {
 });
 
 
-// Wrap the Express app for serverless deployment
-module.exports.handler = app;
+module.exports = app;
