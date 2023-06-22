@@ -7,7 +7,7 @@ import HeaderTask from './components/HeaderTask';
 import BodyTask from './components/BodyTask';
 import BodyAdmin from './components/BodyAdmin';
 
-const server_ip = 'to-do-server-goodmoodman.vercel.app/api';
+const server_ip = 'to-do-server-goodmoodman.vercel.app';
 
 fetch(`https://${server_ip}`)
   .then(response => response.text())
@@ -111,7 +111,7 @@ function App() {
         // Access the parsed data
 
         setUsername(username);
-        if (username === 'admin') setAdmin(true);
+        //if (username === 'admin') setAdmin(true);
         setLoggedin(true);
         setTasks(data.tasks);
         console.log(data);
