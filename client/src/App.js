@@ -7,7 +7,7 @@ import HeaderTask from './components/HeaderTask';
 import BodyTask from './components/BodyTask';
 import BodyAdmin from './components/BodyAdmin';
 
-const server_ip = 'to-do-server-alpha.vercel.app/api';
+const server_ip = 'to-do-server-goodmoodman.vercel.app/api';
 
 fetch(`https://${server_ip}`)
   .then(response => response.text())

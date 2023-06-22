@@ -21,15 +21,15 @@ mongoose.connect(mongoURI, {
     console.error('Error connecting to MongoDB:', error);
   });
 
-app.options('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.sendStatus(200);
-});
 
 // login verification
 
 app.post('/users/login', (req, res) => {
+  if(req.method === 'OPTIONS') {
+    return res.status(200).json(({
+        body: "OK"
+    }))
+}
 
   const { username, password } = req.body;
   console.log(username);
@@ -55,6 +55,11 @@ app.post('/users/login', (req, res) => {
 
 // signup user post
 app.post('/users/signup', (req, res) => {
+  if(req.method === 'OPTIONS') {
+    return res.status(200).json(({
+        body: "OK"
+    }))
+}
 
   const { username, password } = req.body;
   console.log(username);
@@ -89,6 +94,11 @@ app.post('/users/signup', (req, res) => {
 // task list update
 // 
 app.put('/users/:username/tasks', (req, res) => {
+  if(req.method === 'OPTIONS') {
+    return res.status(200).json(({
+        body: "OK"
+    }))
+}
 
   const { username } = req.params;
   const { tasks } = req.body;
@@ -119,6 +129,11 @@ app.put('/users/:username/tasks', (req, res) => {
 });
 // GET all users for admin
 app.get('/users/admin', (req, res) => {
+  if(req.method === 'OPTIONS') {
+    return res.status(200).json(({
+        body: "OK"
+    }))
+}
 
   User.find()
     .then(users => {
