@@ -66,7 +66,7 @@ function App() {
     console.log("finish update");
 
 
-  }, [tasks])
+  }, [tasks, guest, true_username])
 
   // every change to current tab, reset alert
   useEffect(() => {

@@ -16,7 +16,7 @@ function BodyAdmin(props) {
       .catch(error => {
         console.error('Error fetching users:', error);
       });
-  }, []);
+  });
 
   const handleTaskContentChange = (event, userId, taskId) => {
     const updatedUsers = users.map(user => {

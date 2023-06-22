@@ -1,6 +1,6 @@
 import React from 'react'
 import './App_comp.css';
-import { useState } from 'react';
+
  
 function Header(props) {
 
@@ -19,14 +19,14 @@ function Header(props) {
         
         <nav className="navbar navbar-expand-lg navbar-dark text-uppercase" id='mainNav'>
           <div className="container">
-          <a className="navbar-brand">Task Manager</a>
+          <span className="navbar-brand">Task Manager</span>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <a className="nav-item nav-link border border-white rounded" style={{cursor:"pointer"}} onClick={HandleTab_LogIn}>Log In <span className="sr-only">(current)</span></a>
-          <a className="nav-item nav-link" style={{cursor:"pointer"}} onClick={HandleTab_SignUp}>Sign Up</a>
+          <button className="nav-item nav-link border border-white rounded" style={{cursor:"pointer"}} onClick={HandleTab_LogIn}>Log In <span className="sr-only">(current)</span></button>
+          <button className="nav-item nav-link" style={{cursor:"pointer"}} onClick={HandleTab_SignUp}>Sign Up</button>
         </div>
       </div>
       </div>

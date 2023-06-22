@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+
 import Loginform from './Login'
 import Signupform from './Signup'
 import './App_comp.css';
@@ -21,7 +21,7 @@ function Alert(props) {
 
 function Body(props) {
   
-  if (props.curr_tab == 1) {
+  if (props.curr_tab === 1) {
     return (
       <div id='BodyS'>
         <Loginform HandleLogin={props.HandleLogin} setMessage = {props.setMessage} setAlertType = {props.setAlertType} HandleGuest = {props.HandleGuest}></Loginform>
@@ -29,7 +29,7 @@ function Body(props) {
       </div>
     );
   }
-  else if (props.curr_tab == 2) {
+  else if (props.curr_tab === 2) {
     return (
       <div id='BodyS'>
         <Signupform HandleSignup={props.HandleSignup} setMessage = {props.setMessage} setAlertType = {props.setAlertType}></Signupform>

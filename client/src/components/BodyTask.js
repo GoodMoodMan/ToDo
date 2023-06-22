@@ -24,7 +24,7 @@ function BodyTask(props) {
     }
     props.setTasks(taskList);
 
-  },[])
+  })
 
   const getMaxID = (taskList) => {
     var id = 0;
@@ -49,7 +49,7 @@ function BodyTask(props) {
 
     const updatedTasks = [...props.taskList];
     // if dropped on trash can dont return removed task to the task list
-    if (result.destination.droppableId == 'trash') {
+    if (result.destination.droppableId === 'trash') {
       updatedTasks.splice(result.source.index, 1);
     }
     else {
@@ -123,7 +123,7 @@ function BodyTask(props) {
     };
 
 
-    if (isDragging && snapshot.draggingOver == 'trash') {
+    if (isDragging && snapshot.draggingOver === 'trash') {
       return {
         ...defaultStyle,
         opacity: 0,
