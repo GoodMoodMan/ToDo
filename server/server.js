@@ -23,9 +23,7 @@ mongoose.connect(mongoURI, {
 
 // login verification
 app.post('/users/login', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   const { username, password } = req.body;
   console.log(username);
   User.findOne({ username })
@@ -50,9 +48,7 @@ app.post('/users/login', (req, res) => {
 
 // signup user post
 app.post('/users/signup', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   const { username, password } = req.body;
   console.log(username);
   User.findOne({ username })
@@ -86,9 +82,7 @@ app.post('/users/signup', (req, res) => {
 // task list update
 // 
 app.put('/users/:username/tasks', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   const { username } = req.params;
   const { tasks } = req.body;
   console.log("START");
@@ -118,9 +112,7 @@ app.put('/users/:username/tasks', (req, res) => {
 });
 // GET all users for admin
 app.get('/users/admin', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
   User.find()
     .then(users => {
       res.json(users);
