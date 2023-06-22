@@ -6,6 +6,7 @@ const User = require('./models/User');
 const cors = require('cors');
 
 app.use(cors());  
+app.use(cors({ origin: 'https://to-do-kohl-two.vercel.app' }));
 app.use(express.json());
 
 const mongoURI = "mongodb+srv://test:ljR36wHjImUdTaad@cluster0.flnm2su.mongodb.net/?retryWrites=true&w=majority";
