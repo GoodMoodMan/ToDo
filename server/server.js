@@ -1,3 +1,4 @@
+const serverless = require('serverless-http');
 const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
@@ -116,6 +117,7 @@ app.get('/users/admin', (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
     });
 });
-app.listen(3001, () => {
-  console.log('Server started on port 3001');
-});
+
+
+// Wrap the Express app for serverless deployment
+module.exports.handler = serverless(app);
