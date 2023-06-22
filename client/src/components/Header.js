@@ -25,8 +25,8 @@ function Header(props) {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <button className="nav-item nav-link border border-white rounded" style={{cursor:"pointer"}} onClick={HandleTab_LogIn}>Log In <span className="sr-only">(current)</span></button>
-          <button className="nav-item nav-link" style={{cursor:"pointer"}} onClick={HandleTab_SignUp}>Sign Up</button>
+          <button className="nav-item nav-link border border-white rounded nav-button" style={{cursor:"pointer"}} onClick={HandleTab_LogIn}>Log In <span className="sr-only">(current)</span></button>
+          <button className="nav-item nav-link nav-button" style={{cursor:"pointer"}} onClick={HandleTab_SignUp}>Sign Up</button>
         </div>
       </div>
       </div>
@@ -45,8 +45,8 @@ function Header(props) {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <button className="nav-item nav-link " style={{cursor:"pointer"}} onClick={HandleTab_LogIn}>Log In</button>
-          <button className="nav-item nav-link border border-white rounded " style={{cursor:"pointer"}} onClick={HandleTab_SignUp}>Sign Up <span className="sr-only">(current)</span></button>
+          <button className="nav-item nav-link nav-button" style={{cursor:"pointer"}} onClick={HandleTab_LogIn}>Log In</button>
+          <button className="nav-item nav-link border border-white rounded nav-button" style={{cursor:"pointer"}} onClick={HandleTab_SignUp}>Sign Up <span className="sr-only">(current)</span></button>
         </div>
       </div>
       </div>
