@@ -105,10 +105,17 @@ app.post('/users/login', (req, res) => {
         });
     
   });
-app.get('/', (req, res) => {
-    res.send('Hello, World!');
-  });
-
+// GET all users for admin
+app.get('/users/admin', (req, res) => {
+  User.find()
+    .then(users => {
+      res.json(users);
+    })
+    .catch(error => {
+      console.error('Error fetching users:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
 app.listen(3001, () => {
   console.log('Server started on port 3001');
 });

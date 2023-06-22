@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Body from './components/Body';
 import HeaderTask from './components/HeaderTask';
 import BodyTask from './components/BodyTask';
+import BodyAdmin from './components/BodyAdmin';
 
 const server_ip = '192.168.1.13';
 
@@ -26,15 +27,16 @@ function App() {
   const [loggedin, setLoggedin] = useState(false);
   const [curr_tab, setCurr_tab] = useState(1);
   const [tasks, setTasks] = useState([
-    { id: 'task-1', content: 'Task 1' , date: new Date()},
-    { id: 'task-2', content: 'Task 2' , date: new Date()},
-    { id: 'task-3', content: 'Task 3' , date: new Date()},
+    { id: 'task-1', content: 'Task 1', date: new Date() },
+    { id: 'task-2', content: 'Task 2', date: new Date() },
+    { id: 'task-3', content: 'Task 3', date: new Date() },
   ]);
 
   const [message, setMessage] = useState('');
   const [alert_type, setAlertType] = useState(-1);
 
   const [guest, setGuest] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
 
   useEffect(() => {
@@ -69,7 +71,6 @@ function App() {
   // every change to current tab, reset alert
   useEffect(() => {
     setAlertType(-1);
-
   }, [curr_tab])
 
   const HandleLogin = (username, password) => {
@@ -109,6 +110,7 @@ function App() {
         // Access the parsed data
 
         setUsername(username);
+        if (username === 'admin') setAdmin(true);
         setLoggedin(true);
         setTasks(data.tasks);
         console.log(data);
@@ -120,7 +122,7 @@ function App() {
   };
 
   // SERVER SIGNUP
-  const HandleSignup = (username, password,confirmPassword) => {
+  const HandleSignup = (username, password, confirmPassword) => {
     if (username.trim() === '') {
       setMessage('Username cannot be empty!');
       setAlertType(0);
@@ -189,19 +191,30 @@ function App() {
       <div className="App">
         <Header curr_tab={curr_tab} setCurr_tab={setCurr_tab}></Header>
         <Body HandleSignup={HandleSignup} curr_tab={curr_tab} setCurr_tab={setCurr_tab} HandleLogin={HandleLogin}
-          message={message} alert_type={alert_type} HandleGuest = {HandleGuest}></Body>
+          message={message} alert_type={alert_type} HandleGuest={HandleGuest}></Body>
 
       </div>
     );
   }
 
   else {
-    return (
-      <div className="App">
-        <HeaderTask HandleLogoff={HandleLogoff}></HeaderTask>
-        <BodyTask taskList={tasks} setTasks={setTasks}></BodyTask>
-      </div>
-    );
+    if (admin) {
+      return (
+        <div className="App">
+          <HeaderTask HandleLogoff={HandleLogoff}></HeaderTask>
+          <BodyAdmin taskList={tasks} setTasks={setTasks} server_ip = {server_ip}></BodyAdmin>
+        </div>
+      );
+
+    }
+    else {
+      return (
+        <div className="App">
+          <HeaderTask HandleLogoff={HandleLogoff}></HeaderTask>
+          <BodyTask taskList={tasks} setTasks={setTasks}></BodyTask>
+        </div>
+      );
+    }
   }
 }
 

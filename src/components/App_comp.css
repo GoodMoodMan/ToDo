@@ -96,3 +96,8 @@
   }
 }
 
+.table-fields {
+  display:auto;
+  max-width: 20vw;
+
+}
