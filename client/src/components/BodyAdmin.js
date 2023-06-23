@@ -18,6 +18,25 @@ function BodyAdmin(props) {
       });
   });
 
+  // useEffect to send PUT request when users state changes
+  useEffect(() => {
+    fetch(`https://${props.server_ip}/users/admin`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(users),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('User list updated:', data);
+      })
+      .catch(error => {
+        console.error('Error updating user list:', error);
+      });
+  }, [users]); // Dependency array with users state
+
+  
   const handleTaskContentChange = (event, userId, taskId) => {
     const updatedUsers = users.map(user => {
       if (user._id === userId) {

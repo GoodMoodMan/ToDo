@@ -111,7 +111,9 @@ function App() {
         // Access the parsed data
 
         setUsername(username);
-        //if (username === 'admin') setAdmin(true);
+        setAdmin(data.admin);
+        
+        
         setLoggedin(true);
         setTasks(data.tasks);
         console.log(data);

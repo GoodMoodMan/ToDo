@@ -147,5 +147,30 @@ app.get('/users/admin', (req, res) => {
     });
 });
 
+// PUT route to update the User collection with the complete user list
+app.put('/users/admin', (req, res) => {
+  if (req.method === 'OPTIONS') {
+    return res.status(200).json({
+      body: 'OK',
+    });
+  }
+
+  const userList = req.body;
+
+  User.deleteMany({}) // Remove all existing users
+    .then(() => {
+      return User.insertMany(userList); // Insert the new user list
+    })
+    .then(() => {
+      res.status(200).send('User list updated successfully');
+    })
+    .catch(error => {
+      console.error('Error updating user list:', error);
+      res.status(500).json({ error: 'Internal server error' });
+    });
+});
+
+
+
 
 module.exports = app
