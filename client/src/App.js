@@ -123,7 +123,7 @@ function App() {
   };
 
   // SERVER SIGNUP
-  const HandleSignup = (username, password, confirmPassword) => {
+  const HandleSignup = (username, email, password, confirmPassword) => {
     if (username.trim() === '') {
       setMessage('Username cannot be empty!');
       setAlertType(0);
@@ -138,6 +138,17 @@ function App() {
 
     if (password !== confirmPassword) {
       setMessage('Passwords do not match!');
+      setAlertType(0);
+      return;
+    }
+
+    const validateEmail = email => {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailPattern.test(email);
+    };
+    const isValidEmail = validateEmail(email);
+    if (!isValidEmail) {
+      setMessage('Please enter a valid email address');
       setAlertType(0);
       return;
     }

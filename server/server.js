@@ -61,7 +61,7 @@ app.post('/users/signup', (req, res) => {
     }))
 }
 
-  const { username, password } = req.body;
+  const { username, email,  password } = req.body;
   console.log(username);
   User.findOne({ username })
     .then(existingUser => {
@@ -74,10 +74,11 @@ app.post('/users/signup', (req, res) => {
         const newUser = new User({
           username: username,
           password: password,
+          email: email,
           tasks: [
             { id: 'Task 1', content: 'Description 1', date: new Date().toISOString() },
             { id: 'Task 2', content: 'Description 2', date: new Date().toISOString() },
-            // Add more tasks as needed
+            
           ]
         });
         newUser.save();

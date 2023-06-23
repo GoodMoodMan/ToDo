@@ -105,22 +105,7 @@ function Loginform(props) {
                 </div>
                 <div className="row mb-4 align-items-center">
                   <div className="col d-flex justify-content-center">
-                    <div className="form-check">
-                      <input
-                        className="form-check-input"
-                        type="checkbox"
-                        value=""
-                        id="form2"
-                        checked={isChecked}
-                        onChange={handleCheckboxChange}
-                      />
-                      <p
-                        className="form-check-label "
-                        htmlFor="form2"
-                      >
-                        Remember me
-                      </p>
-                    </div>
+                    
                   </div>
 
                   <div className="col">

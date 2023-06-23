@@ -7,6 +7,7 @@ function Signupform(props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [email,setEmail] = useState('');
 
   const onUpdateUsername = (e) => {
     setUsername(e.target.value);
@@ -20,11 +21,13 @@ function Signupform(props) {
     setConfirmPassword(e.target.value);
   };
 
+  const onUpdateEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
   const onSubmitForm = (e) => {
     e.preventDefault();
-  
-  
-    props.HandleSignup(username, password,confirmPassword);
+    props.HandleSignup(username, email, password, confirmPassword);
   };
 
   return (
@@ -46,6 +49,16 @@ function Signupform(props) {
                     value={username}
                     onChange={onUpdateUsername}
                     placeholder="Username"
+                  />
+                </div>
+                <div className="form-outline mb-4">
+                  <input
+                    type="text"
+                    id="form2Example1"
+                    className="form-control form-control-lg"
+                    value={email}
+                    onChange={onUpdateEmail}
+                    placeholder="Email"
                   />
                 </div>
                 <div className="form-outline mb-4">
