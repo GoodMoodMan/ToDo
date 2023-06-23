@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   email: {type: String, required: false},
   tasks: [taskSchema], // Array of task objects
+  admin: {type: Boolean, required: true},
   // Additional user properties...
 });
 

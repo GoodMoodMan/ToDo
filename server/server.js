@@ -79,7 +79,8 @@ app.post('/users/signup', (req, res) => {
             { id: 'Task 1', content: 'Description 1', date: new Date().toISOString() },
             { id: 'Task 2', content: 'Description 2', date: new Date().toISOString() },
             
-          ]
+          ],
+          admin: false
         });
         newUser.save();
         return res.status(200).send('Signup Successful');

@@ -154,12 +154,13 @@ function App() {
     }
 
 
+    console.log(email);
     fetch(`https://${server_ip}/users/signup`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, email, password })
     })
       .then(response => {
         // Handle the response from the server
