@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
   
   username: { type: String, required: true },
   password: { type: String, required: true },
-  email: {type: String, required: true},
+  email: {type: String, required: false},
   tasks: [taskSchema], // Array of task objects
   // Additional user properties...
 });
