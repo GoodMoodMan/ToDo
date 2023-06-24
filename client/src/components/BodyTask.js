@@ -202,8 +202,13 @@ function BodyTask(props) {
                               <div>{task.icon}</div>
 
                               <button type="button" onClick={() => {
-                                if (task.id !== edit_id) setEditId(task.id);
-                                else setEditId(null);
+                                if (task.id !== edit_id){
+                                  setText(task.content);
+                                  setEditId(task.id);
+                                } 
+                                else {
+                                  setEditId(null);
+                                } 
                               }}
 
                                 className="ms-3 btn btn-primary btn-sm">Edit</button>
