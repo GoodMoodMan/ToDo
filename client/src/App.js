@@ -138,6 +138,18 @@ function App() {
       return;
     }
 
+    if (username.includes(' ')) {
+      setMessage('Username cannot contain spaces!');
+      setAlertType(0);
+      return;
+    }
+
+    if (username.length >=20) {
+      setMessage('Username must not exceed 20 characters!');
+      setAlertType(0);
+      return;
+    }
+
     if (password !== confirmPassword) {
       setMessage('Passwords do not match!');
       setAlertType(0);
