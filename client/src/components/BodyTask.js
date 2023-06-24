@@ -64,8 +64,7 @@ function BodyTask(props) {
     const update = [...props.taskList];
     var index = update.findIndex(task => task.id === edit_id);
     if (text.trim() !== '') {
-      // limit 40 characters
-      update[index].content = text.slice(0, 40);
+      update[index].content = text;
     }
     props.setTasks(update);
     setEditId("");
