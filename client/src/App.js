@@ -190,10 +190,19 @@ function App() {
   }
 
   const HandleLogoff = () => {
-    setAlertType(-1);
     setLoggedin(false);
     setGuest(false);
-  }
+    setAdmin(false);
+    setUsername("");
+    setTasks([
+      { id: 'task-1', content: 'Task 1', date: new Date() },
+      { id: 'task-2', content: 'Task 2', date: new Date() },
+      { id: 'task-3', content: 'Task 3', date: new Date() },
+    ]);
+    setMessage('');
+    setAlertType(-1);
+    setCurr_tab(1);
+  };
 
 
   const HandleGuest = () => {

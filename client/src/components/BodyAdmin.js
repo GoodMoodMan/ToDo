@@ -7,7 +7,7 @@ function BodyAdmin(props) {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
 
-  // Fetch users list on initial render
+  // Fetch users list on initial render and every (local) users change
   useEffect(() => {
     fetch(`https://${props.server_ip}/users/admin`)
       .then(response => response.json())
@@ -17,11 +17,10 @@ function BodyAdmin(props) {
       .catch(error => {
         console.error('Error fetching users:', error);
       });
-  }, [users]);
+  });
 
-  useEffect(() => {
-    if (selectedUser && selectedUser.tasks) {
-      fetch(`https://${props.server_ip}/users/${selectedUser.username}/tasks`, {
+  const handleUpdate = () => {
+    fetch(`https://${props.server_ip}/users/${selectedUser.username}/tasks`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -39,9 +38,16 @@ function BodyAdmin(props) {
           console.error('Error occurred:', error);
         });
       console.log('Finish update');
-    }
-    
-  }, [selectedUser]);
+
+      fetch(`https://${props.server_ip}/users/admin`)
+      .then(response => response.json())
+      .then(data => {
+        setUsers(data);
+      })
+      .catch(error => {
+        console.error('Error fetching users:', error);
+      });
+  };
 
   const handleUserSelect = (userId) => {
     const selectedUser = users.find(user => user._id === userId);
@@ -70,17 +76,26 @@ function BodyAdmin(props) {
     setSelectedUser(updatedUser);
   };
 
+  const getMaxID = (taskList) => {
+    var id = 0;
+    var max_id = 0;
+    for (const task of taskList) {
+      id = parseInt(task.id.replace(/^\D+/g, ''));
+      if (id > max_id) max_id = id;
+    }
+    return max_id;
+  }
+
   const handleAddTask = () => {
-    const newTaskId = selectedUser.tasks.length + 1;
-    const newTaskObj = {
-      id: newTaskId,
-      content: 'New Task',
-      date: new Date(),
-    };
+    console.log("hello");
+    const newTaskId = "Task " + (getMaxID(selectedUser.tasks) + 1);
+    console.log(newTaskId);
+    const newTaskObj = { id: newTaskId, content: 'New Task', date: new Date()};
     const updatedTasks = [...selectedUser.tasks, newTaskObj];
     const updatedUser = { ...selectedUser, tasks: updatedTasks };
     setSelectedUser(updatedUser);
   };
+
 
   const handleDeleteTask = (taskId) => {
     const updatedTasks = selectedUser.tasks.filter(task => task.id !== taskId);
@@ -163,6 +178,13 @@ function BodyAdmin(props) {
             onClick={handleAddTask}
           >
             Add Task
+          </button>
+          <button
+            className="btn btn-success btn-sm"
+            onClick={handleUpdate}
+            disabled={!selectedUser || !selectedUser.tasks}
+          >
+            Update
           </button>
         </div>
       )}

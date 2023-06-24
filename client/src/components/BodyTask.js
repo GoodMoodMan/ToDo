@@ -38,7 +38,7 @@ function BodyTask(props) {
 
   const handleAddTask = () => {
     const newTaskId = "Task " + (getMaxID(props.taskList) + 1);
-    const newTaskObj = { id: newTaskId, content: 'newTask', date: new Date(), icon: icon(new Date())};
+    const newTaskObj = { id: newTaskId, content: 'New Task', date: new Date(), icon: icon(new Date())};
     const updatedTasks = [...props.taskList, newTaskObj];
     props.setTasks(updatedTasks);
   };
