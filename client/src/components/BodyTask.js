@@ -87,7 +87,6 @@ function BodyTask(props) {
     update[index].date = date;
     update[index].icon = icon(date);
     props.setTasks(update);
-ㅤ
   }
 
   const grid = 8;
