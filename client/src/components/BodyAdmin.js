@@ -57,7 +57,8 @@ function BodyAdmin(props) {
   const handleTaskContentChange = (event, taskId) => {
     const updatedTasks = selectedUser.tasks.map(task => {
       if (task.id === taskId) {
-        return { ...task, content: event.target.value };
+        let text = event.target.value.slice(0,1000);
+        return { ...task, content: text };
       }
       return task;
     });

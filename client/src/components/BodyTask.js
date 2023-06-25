@@ -64,7 +64,7 @@ function BodyTask(props) {
     const update = [...props.taskList];
     var index = update.findIndex(task => task.id === edit_id);
     if (text.trim() !== '') {
-      update[index].content = text;
+      update[index].content = text.slice(0,1000);
     }
     props.setTasks(update);
     setEditId("");
@@ -87,7 +87,7 @@ function BodyTask(props) {
     update[index].date = date;
     update[index].icon = icon(date);
     props.setTasks(update);
-
+ㅤ
   }
 
   const grid = 8;
