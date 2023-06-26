@@ -3,6 +3,22 @@ import './App_comp.css';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
+
+function Alert(props) {
+  if (props.alert_type === -1) {
+    return (
+      <div></div>
+    )
+  }
+  else {
+    return (
+      <div className = {`alert ${props.alert_type === 1 ? 'alert-success' : 'alert-danger'}`} role="alert">
+        {`${props.message}`}
+      </div>
+    )
+  }
+}
+
 function BodyAdmin(props) {
   const [users, setUsers] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -29,7 +45,9 @@ function BodyAdmin(props) {
       })
         .then(response => {
           if (response.ok) {
-            console.log('Task list updated successfully');
+            props.setAlert(1);
+            props.setMessage("Updated User");
+        
           } else {
             console.error('Failed to update task list:', response.statusText);
           }
@@ -37,7 +55,7 @@ function BodyAdmin(props) {
         .catch(error => {
           console.error('Error occurred:', error);
         });
-      console.log('Finish update');
+     
 
       fetch(`https://${props.server_ip}/users/admin`)
       .then(response => response.json())
@@ -51,6 +69,7 @@ function BodyAdmin(props) {
 
   const handleUserSelect = (userId) => {
     const selectedUser = users.find(user => user._id === userId);
+    props.setAlert(-1);
     setSelectedUser(selectedUser);
   };
 
@@ -88,9 +107,9 @@ function BodyAdmin(props) {
   }
 
   const handleAddTask = () => {
-    console.log("hello");
+  
     const newTaskId = "Task " + (getMaxID(selectedUser.tasks) + 1);
-    console.log(newTaskId);
+  
     const newTaskObj = { id: newTaskId, content: 'New Task', date: new Date()};
     const updatedTasks = [...selectedUser.tasks, newTaskObj];
     const updatedUser = { ...selectedUser, tasks: updatedTasks };
@@ -189,6 +208,8 @@ function BodyAdmin(props) {
           </button>
         </div>
       )}
+      <div className='mt-4'></div>
+      <Alert message = {props.message} alert_type = {props.alert_type}></Alert>
     </div>
   );
 }

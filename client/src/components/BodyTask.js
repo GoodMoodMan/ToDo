@@ -13,18 +13,20 @@ function BodyTask(props) {
 
   const [text, setText] = useState("");
   const [edit_id, setEditId] = useState("");
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
 
 
   // this useEffect runs on initial render
   // adds appropriate icon to every task
   useEffect(() => {
     const taskList = [...props.taskList];
-    for(const task of taskList) {
+    for (const task of taskList) {
       task.icon = icon(task.date);
     }
     props.setTasks(taskList);
 
-  },[])
+  }, [])
 
   const getMaxID = (taskList) => {
     var id = 0;
@@ -38,13 +40,13 @@ function BodyTask(props) {
 
   const handleAddTask = () => {
     const newTaskId = "Task " + (getMaxID(props.taskList) + 1);
-    const newTaskObj = { id: newTaskId, content: 'New Task', date: new Date(), icon: icon(new Date())};
+    const newTaskObj = { id: newTaskId, content: 'New Task', date: new Date(), icon: icon(new Date()) };
     const updatedTasks = [...props.taskList, newTaskObj];
     props.setTasks(updatedTasks);
   };
 
   const handleDragEnd = (result) => {
-    console.log("YEAR");
+
     if (!result.destination) return;
 
     const updatedTasks = [...props.taskList];
@@ -64,7 +66,7 @@ function BodyTask(props) {
     const update = [...props.taskList];
     var index = update.findIndex(task => task.id === edit_id);
     if (text.trim() !== '') {
-      update[index].content = text.slice(0,1000);
+      update[index].content = text.slice(0, 1000);
     }
     props.setTasks(update);
     setEditId("");
@@ -77,9 +79,14 @@ function BodyTask(props) {
   };
 
   const handleDeleteAll = () => {
+    setShowConfirmation(true);
+  };
 
+
+  const confirmDeleteAll = () => {
     props.setTasks([]);
-  }
+    setShowConfirmation(false);
+  };
 
   const handleDateChange = (taskID, date) => {
     const update = [...props.taskList];
@@ -92,10 +99,10 @@ function BodyTask(props) {
   const grid = 8;
   const icon = (deadline) => {
     const timeDiff = new Date(deadline) - new Date().getTime();
-  
+
     const warningThreshold = 3 * 24 * 60 * 60 * 1000; // 3 days in milliseconds
     const dangerThreshold = 24 * 60 * 60 * 1000; // 1 day in milliseconds
-  
+
     // Set the icon based on the time difference
     let icontype = null;
     if (timeDiff <= 0) {
@@ -201,13 +208,13 @@ function BodyTask(props) {
                               <div>{task.icon}</div>
 
                               <button type="button" onClick={() => {
-                                if (task.id !== edit_id){
+                                if (task.id !== edit_id) {
                                   setText(task.content);
                                   setEditId(task.id);
-                                } 
+                                }
                                 else {
                                   setEditId(null);
-                                } 
+                                }
                               }}
 
                                 className="ms-3 btn btn-primary btn-sm">Edit</button>
@@ -271,6 +278,33 @@ function BodyTask(props) {
 
         </DragDropContext>
       </div>
+      {showConfirmation && (
+        <div
+        className="modal show"
+        tabIndex="-1"
+        role="dialog"
+        style={{ display: 'block' }}
+      >
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title text-center">Confirm Delete All</h5>
+              <button
+                type="button"
+                className="btn-close"
+                onClick={() => setShowConfirmation(false)}
+              />
+            </div>
+            <div className="modal-body">
+            <button className="btn btn-danger" onClick={confirmDeleteAll}>
+              Delete All
+            </button>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
     </div>
   );
 

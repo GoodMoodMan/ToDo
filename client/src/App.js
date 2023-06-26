@@ -9,16 +9,7 @@ import BodyAdmin from './components/BodyAdmin';
 
 const server_ip = 'to-do-server-goodmoodman.vercel.app';
 
-fetch(`https://${server_ip}`)
-  .then(response => response.text())
-  .then(data => {
-    // Handle the response data
-    console.log(data);
-  })
-  .catch(error => {
-    // Handle the error
-    console.error(error);
-  });
+
 
 
 function App() {
@@ -40,11 +31,15 @@ function App() {
 
 
   useEffect(() => {
+    // if username is empty string dont post
+    if (true_username==='') {
+      return;
+    }
     // if user is a guest dont post to server
     if (guest) return;
     // this useEffect hook gets called on any change to tasks,
     // putting the new task list to server using saved username
-    console.log("update");
+  
     fetch(`https://${server_ip}/users/${true_username}/tasks`, {
       
       method: 'PUT',
@@ -55,7 +50,7 @@ function App() {
     })
       .then(response => {
         if (response.ok) {
-          console.log('Task list updated successfully');
+        
 
         } else {
           console.error('Failed to update task list:', response.statusText);
@@ -64,7 +59,7 @@ function App() {
       .catch(error => {
         console.error('Error occurred:', error);
       });
-    console.log("finish update");
+  
 
 
   }, [tasks, guest, true_username])
@@ -75,7 +70,7 @@ function App() {
   }, [curr_tab])
 
   const HandleLogin = (username, password) => {
-    console.log("connect");
+  
     fetch(`https://${server_ip}/users/login`, {
       method: 'POST',
       headers: {
@@ -88,8 +83,7 @@ function App() {
         // Handle the response from the server
         if (response.status === 200) {
           // Login successful
-          setMessage('Login Successful');
-          setAlertType(1);
+          
           return response.json(); // Parse the response body as JSON
         } else if (response.status === 401) {
           // Invalid password
@@ -116,7 +110,7 @@ function App() {
         
         setLoggedin(true);
         setTasks(data.tasks);
-        console.log(data);
+       
 
       })
       .catch(error => {
@@ -168,7 +162,6 @@ function App() {
     }
 
 
-    console.log(email);
     fetch(`https://${server_ip}/users/signup`, {
       method: 'POST',
       headers: {
@@ -238,7 +231,8 @@ function App() {
       return (
         <div className="App">
           <HeaderTask HandleLogoff={HandleLogoff}></HeaderTask>
-          <BodyAdmin taskList={tasks} setTasks={setTasks} server_ip = {server_ip}></BodyAdmin>
+          <BodyAdmin taskList={tasks} setTasks={setTasks} server_ip = {server_ip} alert_type={alert_type} setAlert = {setAlertType} message={message} setMessage={setMessage}></BodyAdmin>
+          
         </div>
       );
 
